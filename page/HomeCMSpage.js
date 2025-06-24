@@ -1,4 +1,6 @@
 import { expect } from '@playwright/test';
+const path = require('path');
+
 
 class HomeCMSPage {
   constructor(page) {
@@ -11,6 +13,12 @@ class HomeCMSPage {
     this.successMessage = page.locator('#swal2-title');
     this.tittleMessage = page.locator('.invalid-feedback').first();
     this.descriptionMessage = page.locator('.invalid-feedback').last();
+    this.imageBannerTab = page.locator('button:has-text(" Banner Image ")');
+    this.changeButton = page.getByRole('button', { name: 'Change' });
+    this.videoBannerTab = page.locator('button:has-text(" Banner Video ")');
+    this.inputImageFile = page.locator('input[name="image_input"]');
+    this.inputVideoFile = page.locator('input[name="video_input"]');
+    
   }
   async goto() {
     await this.page.goto('https://xocietyfragrance.com/dashboard');
@@ -33,6 +41,28 @@ class HomeCMSPage {
   async isDescriptionEmpty(message){
     await expect(this.descriptionMessage).toHaveText(message);
   }
+
+  async uploadImageBanner(){
+    const filePath = path.resolve(__dirname, 'image.png');
+    await this.imageBannerTab.click();
+    await expect(this.changeButton).toBeVisible();
+    await this.changeButton.click();
+    await this.inputImageFile.setInputFiles(filePath);
+    await this.saveButton.click();
+    await this.okButtonPopup.click();
+  }
+
+  async uploadVideoBanner(){
+    const filePath = path.resolve(__dirname, 'video.mp4');
+    await this.videoBannerTab.click();
+    await expect(this.changeButton).toBeVisible();
+    await this.changeButton.click();
+    await this.inputVideoFile.setInputFiles(filePath);
+    await this.saveButton.click();
+    await this.okButtonPopup.click();
+  }
+
+
 
 
 }
