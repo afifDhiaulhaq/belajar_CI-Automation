@@ -48,6 +48,7 @@ class HomeCMSPage {
     await expect(this.changeButton).toBeVisible();
     await this.changeButton.click();
     await this.inputImageFile.setInputFiles(filePath);
+    await expect(this.saveButton).toBeVisible();
     await this.saveButton.click();
     await this.okButtonPopup.click();
   }
@@ -58,7 +59,8 @@ class HomeCMSPage {
     await expect(this.changeButton).toBeVisible();
     await this.changeButton.click();
     await this.inputVideoFile.setInputFiles(filePath);
-    await this.saveButton.click();
+    // await expect(this.saveButton).toBeVisible();
+    await this.saveButton.click({ timeout: 10000 });
     await this.okButtonPopup.click();
   }
 

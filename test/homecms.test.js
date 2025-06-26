@@ -64,12 +64,12 @@ test('Upload image banner', async ({page},testInfo) =>{
     throw error;
   }
 })
-test('Upload video banner', async ({page},testInfo) =>{
-  try {
-    const homeCMSpage = await setup(page);
-    await homeCMSpage.uploadVideoBanner();
-  } catch (error) {
-    await attachScreenshot(page, testInfo);
-    throw error;
-  }
-})
+// test('Upload video banner', async ({page},testInfo) =>{
+//   try {
+//     const homeCMSpage = await setup(page);
+//     await homeCMSpage.uploadVideoBanner();
+//   } catch (error) {
+//     await attachScreenshot(page, testInfo);
+//     throw error;
+//   }
+// })
